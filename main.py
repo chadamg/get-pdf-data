@@ -53,7 +53,7 @@ def get_pdf_data():
     if datetime.now().hour >= int(isha.split(":")[0]) and datetime.now().minute >= int(
         isha.split(":")[1]
     ):
-        fajr = df.iloc[date.today().day + 1, [0]]
+        fajr = df.iloc[date.today().day + 1, 0]
         fajr = "0" + fajr
 
     return {
