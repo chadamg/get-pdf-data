@@ -40,6 +40,20 @@ def get_pdf_data():
         date.today().day, [0, 1, 3, 4, 5, 11]
     ]
 
+    fajr = "0" + fajr
+    sunrise = "0" + sunrise
+    if not dhuhr.split(":")[0] == "12":
+        dhuhr = str(int(dhuhr.split(":")[0]) + 12) + ":" + dhuhr.split(":")[1]
+    asr = str(int(asr.split(":")[0]) + 12) + ":" + asr.split(":")[1]
+    isha = str(int(isha.split(":")[0]) + 12) + ":" + isha.split(":")[1]
+    maghrib = str(int(maghrib.split(":")[0]) + 12) + ":" + maghrib.split(":")[1]
+
+    if datetime.now().hour >= int(isha.split(":")[0]) and datetime.now().minute >= int(
+        isha.split(":")[1]
+    ):
+        fajr = df.iloc[date.today().day + 1, [0]]
+        fajr = "0" + fajr
+
     return {
         "Fajr": fajr,
         "Sunrise": sunrise,
