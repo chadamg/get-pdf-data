@@ -40,6 +40,7 @@ def get_pdf_data():
         date.today().day, [0, 1, 3, 4, 5, 11]
     ]
 
+    # convert time to 24hr time
     fajr = "0" + fajr
     sunrise = "0" + sunrise
     if not dhuhr.split(":")[0] == "12":
@@ -48,6 +49,7 @@ def get_pdf_data():
     isha = str(int(isha.split(":")[0]) + 12) + ":" + isha.split(":")[1]
     maghrib = str(int(maghrib.split(":")[0]) + 12) + ":" + maghrib.split(":")[1]
 
+    # return tomorrow data for fajr if current time is isha
     if datetime.now().hour >= int(isha.split(":")[0]) and datetime.now().minute >= int(
         isha.split(":")[1]
     ):
