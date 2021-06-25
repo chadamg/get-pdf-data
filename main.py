@@ -45,6 +45,6 @@ def get_pdf_data():
         "Sunrise": sunrise,
         "Dhuhr": dhuhr,
         "Asr": asr,
-        "Isha": isha,
         "Maghrib": maghrib,
+        "Isha": isha,
     }
