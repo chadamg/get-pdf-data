@@ -56,6 +56,13 @@ def get_pdf_data():
         fajr = df.iloc[date.today().day + 1, 0]
         fajr = "0" + fajr
 
+    # return yesterday data for isha if current time is past midnight
+    if datetime.now().hour <= int(fajr.split(":")[0]) and datetime.now().minute < int(
+        fajr.split(":")[1]
+    ):
+        isha = df.iloc[date.today().day - 1, 5]
+        isha = str(int(isha.split(":")[0]) + 12) + ":" + isha.split(":")[1]
+
     return {
         "Fajr": fajr,
         "Sunrise": sunrise,
