@@ -12,6 +12,25 @@ app = FastAPI()
 def get_pdf_data():
 
     pdf_url = ""
+    months = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "March",
+        "Apr",
+        "April",
+        "May",
+        "Jun",
+        "June",
+        "Jul",
+        "July",
+        "Aug",
+        "Sep",
+        "Sept",
+        "Oct",
+        "Nov",
+        "Dec",
+    ]
 
     # get html page from url
     url = "https://owma.org.uk/salaah-times/"
@@ -23,10 +42,12 @@ def get_pdf_data():
         "a", {"class": "elementor-button-link elementor-button elementor-size-sm"}
     ):
         pdf_link = link.get("href")
+        y = pdf_link.split("/")[7]
 
         # save pdf link for current month only
-        if pdf_link.split("-")[1].split("/")[4] == datetime.now().strftime("%B"):
-            pdf_url += pdf_link
+        for month in months:
+            if month in y and month in datetime.now().strftime("%B"):
+                pdf_url += pdf_link
 
     # get binary pdf data from url and store as bytes object
     req = get(pdf_url, headers={"User-Agent": "Mozilla/5.0"})
