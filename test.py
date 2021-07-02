@@ -18,7 +18,7 @@ for link in soup.find_all(
     pdf_link = link.get("href")
 
     # save pdf link for current month only
-    if pdf_link.split("-")[1].split("/")[4] == datetime.now().strftime("%B"):
+    if int(pdf_link.split("/")[6]) == date.today().month:
         pdf_url += pdf_link
 
 # print pdf name
@@ -66,3 +66,14 @@ x.to_json("data.json", orient='records', indent=2)
 #     fajr = "0"+fajr
 
 # print(fajr, sunrise, dhuhr, asr, maghrib, isha)
+
+
+import re
+from datetime import datetime
+x = 'https://owma.org.uk/wp-content/uploads/2021/06/Jul2021.pdf'
+y = x.split('/')[7]
+# date.today().month
+months = ['Jan', 'Feb', 'Mar', 'March', 'Apr', 'April', 'May', 'Jun', 'June', 'Jul', 'July', 'Aug', 'Sep', 'Sept', 'Oct', 'Nov', 'Dec']
+for month in months:
+    if month in y and month in datetime.now().strftime('%B'):
+        print(month)
