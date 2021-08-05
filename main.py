@@ -46,7 +46,7 @@ def get_pdf_data():
     if datetime.now().hour >= int(isha.split(":")[0]) and datetime.now().minute >= int(
         isha.split(":")[1]
     ):
-        tomorrow_data = month_data[date.today().day + 1]
+        tomorrow_data = month_data[date.today().day]
         fajr = format_time(tomorrow_data["salah_timing"]["fajr_adhan"])
 
     # return yesterday data for isha if current time is past midnight
