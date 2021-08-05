@@ -77,3 +77,24 @@ months = ['Jan', 'Feb', 'Mar', 'March', 'Apr', 'April', 'May', 'Jun', 'June', 'J
 for month in months:
     if month in y and month in datetime.now().strftime('%B'):
         print(month)
+
+
+import json
+items=soup.select('div[class="masjidnow-container"]')
+
+def format_time(prayer):
+    in_time = datetime.strptime(prayer, "%I:%M%p")
+    out_time = datetime.strftime(in_time, "%H:%M")
+    return out_time
+
+for item in items:
+    data = json.loads(item['data-masjidnow-masjid'])
+    month_data = data['salah_timings']
+    today_data = month_data[date.today().day-1]
+    fajr = format_time(today_data['salah_timing']['fajr_adhan'])
+    sunrise = format_time(today_data['salah_timing']['sunrise_adhan'])
+    dhuhr = format_time(today_data['salah_timing']['dhuhr_adhan'])
+    asr = format_time(today_data['salah_timing']['asr_adhan'])
+    maghrib = format_time(today_data['salah_timing']['maghrib_adhan'])
+    isha = format_time(today_data['salah_timing']['isha_adhan'])
+    print(fajr, sunrise, dhuhr, asr, maghrib, isha)
